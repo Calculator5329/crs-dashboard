@@ -1,35 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "@/contexts/ThemeContext";
+import { ConfigProvider } from "@/contexts/ConfigContext";
+import { AppLayout } from "@/components/layout/AppLayout";
+import { DashboardPage } from "@/pages/DashboardPage";
+import { AIUsagePage } from "@/pages/AIUsagePage";
+import { APILogsPage } from "@/pages/APILogsPage";
+import { CostPage } from "@/pages/CostPage";
+import { LimitsPage } from "@/pages/LimitsPage";
+import { HealthPage } from "@/pages/HealthPage";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <ThemeProvider>
+      <ConfigProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<AppLayout />}>
+              <Route path="/" element={<DashboardPage />} />
+              <Route path="/ai-usage" element={<AIUsagePage />} />
+              <Route path="/api-logs" element={<APILogsPage />} />
+              <Route path="/cost" element={<CostPage />} />
+              <Route path="/limits" element={<LimitsPage />} />
+              <Route path="/health" element={<HealthPage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </ConfigProvider>
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;
