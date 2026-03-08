@@ -39,7 +39,7 @@ export function FilterBar({ filters, values, onChange, onClear }: FilterBarProps
           <Select
             key={filter.key}
             value={values[filter.key] || "all"}
-            onValueChange={(v) => onChange(filter.key, v)}
+            onValueChange={(v) => onChange(filter.key, v ?? "all")}
           >
             <SelectTrigger className="w-[160px] h-9">
               <SelectValue placeholder={filter.label} />

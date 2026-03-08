@@ -13,7 +13,6 @@ import {
   PieChart,
   Pie,
   Cell,
-  Legend,
 } from "recharts";
 import { StatCard } from "@/components/shared/StatCard";
 import { StatusPill, MethodBadge } from "@/components/shared/StatusPill";
@@ -22,7 +21,7 @@ import { useConfig } from "@/contexts/ConfigContext";
 import { firestore } from "@/lib/crs-client";
 import { formatCurrency, formatTokenCount, formatNumber, formatTimeAgo } from "@/lib/formatters";
 import { PROVIDER_COLORS, ROUTE_GROUP_COLORS } from "@/lib/constants";
-import { format, subDays } from "date-fns";
+import { format } from "date-fns";
 
 interface DailySummary {
   date: string;
@@ -190,7 +189,7 @@ export function DashboardPage() {
                 <XAxis dataKey="date" className="text-xs" tick={{ fontSize: 12 }} />
                 <YAxis className="text-xs" tick={{ fontSize: 12 }} tickFormatter={(v) => `$${v}`} />
                 <Tooltip
-                  formatter={(value: number) => [formatCurrency(value), "Cost"]}
+                  formatter={(value) => [formatCurrency(Number(value)), "Cost"]}
                   contentStyle={{
                     backgroundColor: "hsl(var(--card))",
                     border: "1px solid hsl(var(--border))",
@@ -217,7 +216,7 @@ export function DashboardPage() {
                     dataKey="value"
                     nameKey="name"
                     label={({ name, percent }) =>
-                      `${name} ${(percent * 100).toFixed(0)}%`
+                      `${name} ${((percent ?? 0) * 100).toFixed(0)}%`
                     }
                   >
                     {routeGroupData.map((entry) => (
@@ -252,7 +251,7 @@ export function DashboardPage() {
                     dataKey="value"
                     nameKey="name"
                     label={({ name, percent }) =>
-                      `${name} ${(percent * 100).toFixed(0)}%`
+                      `${name} ${((percent ?? 0) * 100).toFixed(0)}%`
                     }
                   >
                     {providerData.map((entry) => (

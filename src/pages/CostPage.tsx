@@ -243,7 +243,7 @@ export function CostPage() {
                 <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
                 <XAxis dataKey="date" tick={{ fontSize: 12 }} />
                 <YAxis tick={{ fontSize: 12 }} tickFormatter={(v) => `$${v}`} />
-                <Tooltip formatter={(v: number) => [formatCurrency(v), "Cost"]} />
+                <Tooltip formatter={(v) => [formatCurrency(Number(v)), "Cost"]} />
                 <ReferenceLine
                   y={stats.dailyLimit}
                   stroke="#ef4444"
@@ -269,7 +269,7 @@ export function CostPage() {
                     dataKey="value"
                     nameKey="name"
                     label={({ name, percent }) =>
-                      `${name} ${(percent * 100).toFixed(0)}%`
+                      `${name} ${((percent ?? 0) * 100).toFixed(0)}%`
                     }
                   >
                     {providerCostData.map((entry) => (
@@ -279,7 +279,7 @@ export function CostPage() {
                       />
                     ))}
                   </Pie>
-                  <Tooltip formatter={(v: number) => [formatCurrency(v), "Cost"]} />
+                  <Tooltip formatter={(v) => [formatCurrency(Number(v)), "Cost"]} />
                   <Legend />
                 </PieChart>
               </ResponsiveContainer>
@@ -299,7 +299,7 @@ export function CostPage() {
               <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
               <XAxis dataKey="date" tick={{ fontSize: 12 }} />
               <YAxis tick={{ fontSize: 12 }} tickFormatter={(v) => `$${v}`} />
-              <Tooltip formatter={(v: number) => [formatCurrency(v), "Cost"]} />
+              <Tooltip formatter={(v) => [formatCurrency(Number(v)), "Cost"]} />
               <Line
                 type="monotone"
                 dataKey="cost"

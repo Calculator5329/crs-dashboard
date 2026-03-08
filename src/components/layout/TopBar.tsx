@@ -56,10 +56,10 @@ export function TopBar() {
     <header className="flex h-14 items-center justify-between border-b px-4 bg-background">
       <div className="flex items-center gap-3">
         <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="ghost" size="icon" className="md:hidden">
-              <Menu className="h-5 w-5" />
-            </Button>
+          <SheetTrigger
+            render={<Button variant="ghost" size="icon" className="md:hidden" />}
+          >
+            <Menu className="h-5 w-5" />
           </SheetTrigger>
           <SheetContent side="left" className="w-60 p-0">
             <SheetHeader className="border-b px-4 h-14 flex justify-center">

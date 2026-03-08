@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { Brain, Zap, DollarSign, Clock, Activity } from "lucide-react";
+import { Brain, Zap, DollarSign, Clock } from "lucide-react";
 import {
   BarChart,
   Bar,
@@ -8,8 +8,6 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  AreaChart,
-  Area,
 } from "recharts";
 import { StatCard } from "@/components/shared/StatCard";
 import { StatusPill } from "@/components/shared/StatusPill";
@@ -26,7 +24,7 @@ import {
   formatLatency,
   formatTimeAgo,
 } from "@/lib/formatters";
-import { PROVIDERS, PROVIDER_COLORS } from "@/lib/constants";
+import { PROVIDERS } from "@/lib/constants";
 
 interface AIUsageRecord {
   id?: string;
@@ -268,7 +266,7 @@ export function AIUsagePage() {
                     tick={{ fontSize: 11 }}
                     width={150}
                   />
-                  <Tooltip formatter={(v: number) => [formatTokenCount(v), "Tokens"]} />
+                  <Tooltip formatter={(v) => [formatTokenCount(Number(v)), "Tokens"]} />
                   <Bar dataKey="tokens" fill="var(--chart-1)" radius={[0, 4, 4, 0]} />
                 </BarChart>
               </ResponsiveContainer>
